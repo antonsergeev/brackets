@@ -1,5 +1,5 @@
 module.exports = function check(str, bracketsConfig) {
-  const specialCharacters = '()[]{}||'.split('')
+  const specialCharacters = '()[]{}|'.split('')
   const bracketsConfigForRegExp = bracketsConfig.map(brackets => brackets.map(bracket => specialCharacters.includes(bracket) ? '\\' + bracket : bracket).join(''));
   const regex = new RegExp(bracketsConfigForRegExp.join('|'), 'g');
   let testStr = str;
