@@ -1,6 +1,9 @@
 module.exports = function check(str, bracketsConfig) {
-  const regex = new RegExp(bracketsConfig.map(brackets => '\\' + brackets.join('\\')).join('|'), 'g');
+  const special_characters = '()[]{}||'.split('')
+  const bracketsConfigForRegExp = bracketsConfig.map(brackets => brackets.map(bracket => special_characters.includes(bracket) ? '\\' + bracket : bracket).join(''));
+  const regex = new RegExp(bracketsConfigForRegExp.join('|'), 'g');
   let testStr = str;
+  console.log(`regex = ${regex}`)
   while (regex.test(testStr)) {
     testStr = testStr.replace(regex, '');
   }
